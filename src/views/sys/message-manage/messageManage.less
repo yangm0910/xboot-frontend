@@ -1,12 +1,36 @@
 .message {
-    background: hsla(0, 6%, 93%, 0.815);
-    .left-contact{
-      width: 20%;
-      float: left;
-      height: 600px;
-    }
-    .right-chatwindow {
-      margin-left: 20px;
-      width: 70%;
+  background: hsla(0, 6%, 93%, 0.815);
+  height: 100%;
+  .left-contact {
+    width: 20%;
+    float: left;
+    height: 600px;
+    margin: 0 20px;
+  }
+  .right-chatwindow {
+    background: rgba(252, 249, 249, 0.925);
+    margin: 20px;
+    overflow: hidden;
+    width: 70%;
+    // height: 500px;
+    .message-record {
+      height: 500px;
+      .contactor {
+        text-align: center;
+      }
+      ul {
+        .single-msg {
+          height: 40px;
+          background: rgba(185, 236, 144, 0.856);
+          border-radius: 3px;
+          box-shadow: 2em;
+          width: 100px;
+          margin-bottom: 10px;
+          line-height: 40px;
+          font-size: 18px;
+          padding:0 10px;
+        }
+      }
     }
   }
+}
