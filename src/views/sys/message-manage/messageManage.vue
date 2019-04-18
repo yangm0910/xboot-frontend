@@ -33,17 +33,34 @@ import Cookies from "js-cookie";
 export default {
   data() {
     return {
+      username: "",
       value: "hello",
       websocket: null,
       messageRecords: [],
       columns1: [
         {
-          title: "Contact",
-          key: "name",
-          render: (h, param) => {
-            console.log(h, param.row.name);
-            return h(param.row.name)
+          title: "Action",
+          key: "action",
+          render: (h, params) => {
+            return h(
+              "el-button",
+              {
+                attrs: {
+                  type: "text"
+                },
+                on: {
+                  click: () => {
+                    this.init();
+                  }
+                }
+              },
+              "Action"
+            );
           }
+        },
+        {
+          title: "Contact",
+          key: "name"
         }
       ],
       data2: [{ name: "test" }, { name: "test2" }]
@@ -55,6 +72,7 @@ export default {
       //判断当前浏览器是否支持WebSocket
       let userInfo = JSON.parse(Cookies.get("userInfo"));
       let username = userInfo.username;
+      this.username = username;
       if ("WebSocket" in window) {
         this.websocket = new WebSocket(
           "ws://127.0.0.1:8888/xboot/websocket/" + username
@@ -78,7 +96,7 @@ export default {
       console.log("colse");
     },
     sendMsg: function(msg) {
-      this.websocket.send(this.value);
+      this.websocket.send(JSON.stringify({ "receiver": this.username, "content": this.value }));
     }
   }
 };
