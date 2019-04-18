@@ -2,28 +2,19 @@
   <div class="message">
     <div class="left-contact">
       <Table height="800" :columns="columns1" :data="data2"></Table>
-
-      <!-- <ul>
-        <li>111</li>
-        <li>222</li>
-      </ul>-->
     </div>
     <div class="right-chatwindow">
       <div class="message-record">
         <div class="contactor">
           <h1>people</h1>
         </div>
-        <ul>
-          <li class="single-msg">hi</li>
-
-          <li class="single-msg">hi</li>
-
-          <li class="single-msg">hi</li>
+        <ul v-for="msg in messageRecords">
+          <li class="single-msg">{{msg}}</li>
         </ul>
       </div>
       <div class="message-input">
         <Input v-model="value" placeholder="Enter something..." style="width: 80%"/>
-        <Button type="primary" @click="sendMsg"  style="width: 20%">Primary</Button>
+        <Button type="primary" @click="sendMsg" style="width: 20%">Primary</Button>
       </div>
     </div>
     <!-- <Table height="200" :columns="columns1" :data="data2"></Table>
@@ -48,7 +39,11 @@ export default {
       columns1: [
         {
           title: "Contact",
-          key: "name"
+          key: "name",
+          render: (h, param) => {
+            console.log(h, param.row.name);
+            return h(param.row.name)
+          }
         }
       ],
       data2: [{ name: "test" }, { name: "test2" }]
