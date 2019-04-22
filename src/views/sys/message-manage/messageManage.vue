@@ -6,10 +6,10 @@
     <div class="right-chatwindow">
       <div class="message-record">
         <div class="contactor">
-          <h1>people</h1>
+          <h1>{{people}}</h1>
         </div>
-        <ul v-for="msg in messageRecords">
-          <li class="single-msg">{{msg}}</li>
+        <ul v-for="msg in messageRecords" >
+          <li class="single-msg" >{{msg}}</li>
         </ul>
       </div>
       <div class="message-input">
@@ -36,6 +36,7 @@ export default {
       username: "",
       value: "hello",
       websocket: null,
+      people:"",
       messageRecords: [],
       columns1: [
         {
@@ -50,7 +51,9 @@ export default {
                 },
                 on: {
                   click: () => {
-                    this.init();
+                    console.log(this.data2[params.index].name)
+                    this.people=this.data2[params.index].name
+                    this.init(this.data2[params.index].name);
                   }
                 }
               },
@@ -63,16 +66,16 @@ export default {
           key: "name"
         }
       ],
-      data2: [{ name: "test" }, { name: "test2" }]
+      data2: [{ name: "test" }, { name: "admin" }]
     };
   },
 
   methods: {
-    init() {
+    init(rec) {
       //判断当前浏览器是否支持WebSocket
       let userInfo = JSON.parse(Cookies.get("userInfo"));
       let username = userInfo.username;
-      this.username = username;
+      this.username = rec;
       if ("WebSocket" in window) {
         this.websocket = new WebSocket(
           "ws://127.0.0.1:8888/xboot/websocket/" + username
