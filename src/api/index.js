@@ -50,7 +50,10 @@ export const changePass = (params) => {
 export const unlock = (params) => {
     return postRequest('/user/unlock', params)
 }
-
+// 获取所有用户
+export const apiGetAllUser = (params) => {
+    return getRequest('/user/getAllUser', params)
+}
 
 
 // github登录
@@ -323,7 +326,10 @@ export const editMessageSend = (params) => {
 export const deleteMessageSend = (ids, params) => {
     return deleteRequest(`/messageSend/delByIds/${ids}`, params)
 }
-
+// 发送消息
+export const apiSendMessage = (params) => {
+    return postRequest('/api/ws/sendOne', params)
+}
 
 
 // base64上传
